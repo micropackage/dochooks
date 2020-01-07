@@ -115,7 +115,9 @@ $example = Helper::hook( new Example() );
 
 ### Fallback
 
-@todo Write fallback method here.
+Because the HookAnnotations object stores the called hooks in `_called_doc_hooks` property, you are able to pull them out and parse them into a list of old `add_action`, `add_filter` and `add_shortcode` functions.
+
+For this you'll need a central "repository" of all objects with hooks ie. Runtime class. [See the example of this approach](https://github.com/BracketSpace/Notification/blob/master/bin/dump-hooks.php) in the Notification plugin, which uses the WP CLI to dump all the hooks into separate file.
 
 ## 📦 About the Micropackage project
 

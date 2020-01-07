@@ -33,7 +33,7 @@ class HookAnnotations {
 	 * @since 1.0.0
 	 * @var   array
 	 */
-	protected $_called_doc_hooks = [];
+	protected $_called_doc_hooks = []; // phpcs:ignore
 
 	/**
 	 * Add actions/filters from the method of a class based on DocBlock
@@ -55,7 +55,7 @@ class HookAnnotations {
 			return $object;
 		}
 
-		$reflector  = new \ReflectionObject( $object );
+		$reflector = new \ReflectionObject( $object );
 
 		$this->_called_doc_hooks[ $class_name ] = [];
 

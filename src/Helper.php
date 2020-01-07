@@ -35,7 +35,8 @@ class Helper {
 	 * Hooks object methods.
 	 *
 	 * @since  1.0.0
-	 * @return mixed Subject object.
+	 * @param  mixed $object The class object or null.
+	 * @return mixed         Subject object.
 	 */
 	public static function hook( $object ) {
 		$dochooks = new HookAnnotations();
