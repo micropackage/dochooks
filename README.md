@@ -86,8 +86,32 @@ use Micropackage\DocHooks\Helper;
 
 ### Using within the class
 
+You can extend the HookAnnotations class:
+
 ```php
+use Micropackage\DocHooks\HookAnnotations;
+
 class Example extends HookAnnotations {
+
+	/**
+	 * @action test
+	 */
+	public function test_action() {}
+
+}
+
+$example = new Example();
+$example->add_hooks();
+```
+
+Or use the Trait:
+
+```php
+use Micropackage\DocHooks\HookTrait;
+
+class Example {
+
+	use HookTrait;
 
 	/**
 	 * @action test
