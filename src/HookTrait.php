@@ -132,7 +132,7 @@ trait HookTrait {
 	/**
 	 * Gets hook calls
 	 *
-	 * @since  [Next]
+	 * @since  1.0.2
 	 * @return array
 	 */
 	public function get_calls() {
