@@ -6,6 +6,10 @@
 [![Total Downloads](https://poser.pugx.org/micropackage/dochooks/downloads)](https://packagist.org/packages/micropackage/dochooks)
 [![License](https://poser.pugx.org/micropackage/dochooks/license)](https://packagist.org/packages/micropackage/dochooks)
 
+<p align="center">
+    <img src="https://bracketspace.com/extras/micropackage/micropackage-small.png" alt="Micropackage logo"/>
+</p>
+
 ## 🧬 About DocHooks
 
 The Laravel or Symfony projects are using method annotations for various things. This helps to have the project organized without too much code. WordPress has no implementation of such concept and this package is a remedy.
@@ -82,8 +86,32 @@ use Micropackage\DocHooks\Helper;
 
 ### Using within the class
 
+You can extend the HookAnnotations class:
+
 ```php
+use Micropackage\DocHooks\HookAnnotations;
+
 class Example extends HookAnnotations {
+
+	/**
+	 * @action test
+	 */
+	public function test_action() {}
+
+}
+
+$example = new Example();
+$example->add_hooks();
+```
+
+Or use the Trait:
+
+```php
+use Micropackage\DocHooks\HookTrait;
+
+class Example {
+
+	use HookTrait;
 
 	/**
 	 * @action test

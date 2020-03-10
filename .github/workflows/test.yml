@@ -1,0 +1,15 @@
+name: Test
+
+on: ['pull_request', 'push']
+
+jobs:
+  phpcs:
+    name: WordPress Coding Standards
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: composer install --no-progress
+    - name: Coding Standards
+      run: composer phpcs
