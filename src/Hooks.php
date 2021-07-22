@@ -80,7 +80,7 @@ class Hooks extends Singleton {
 	/**
 	 * Returns hooks registered for given object.
 	 *
-	 * @since  [next]
+	 * @since  1.1.0
 	 * @param  object $object Object to get the hooks for.
 	 * @return array          Hooks registered for given object.
 	 */

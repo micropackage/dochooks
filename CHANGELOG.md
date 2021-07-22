@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [next]
+## 1.1.0
 
 ### Added
 - Central Hooks class storing hooked objects
