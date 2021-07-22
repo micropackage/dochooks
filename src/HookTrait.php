@@ -28,14 +28,6 @@ trait HookTrait {
 	protected static $pattern = '#\* @(?P<type>filter|action|shortcode)\s+(?P<name>[a-z0-9\-\.\/_]+)(\s+(?P<priority>\d+))?#';
 
 	/**
-	 * Array with added hooks.
-	 *
-	 * @since 1.0.0
-	 * @var   array
-	 */
-	protected $_called_doc_hooks = []; // phpcs:ignore
-
-	/**
 	 * Add actions/filters from the method of a class based on DocBlock
 	 *
 	 * @since  1.0.0
@@ -43,21 +35,18 @@ trait HookTrait {
 	 * @return mixed         The subject.
 	 */
 	public function add_hooks( $object = null ) {
-
 		if ( is_null( $object ) ) {
 			$object = $this;
 		}
 
-		$class_name = get_class( $object );
+		$hooks = Hooks::get();
 
-		// Don't add the hooks twice.
-		if ( isset( $this->_called_doc_hooks[ $class_name ] ) ) {
-			return $object;
+		if ( $hooks->has_object( $object ) ) {
+			// Don't add the hooks twice.
+			return;
 		}
 
 		$reflector = new \ReflectionObject( $object );
-
-		$this->_called_doc_hooks[ $class_name ] = [];
 
 		foreach ( $reflector->getMethods() as $method ) {
 			$doc       = $method->getDocComment();
@@ -75,20 +64,18 @@ trait HookTrait {
 
 					call_user_func( [ $this, "add_{$type}" ], $name, $callback, compact( 'priority', 'arg_count' ) );
 
-					$this->_called_doc_hooks[ $class_name ][] = [
+					$hooks->add_hook( $this, [
 						'name'      => $name,
 						'type'      => $type,
 						'callback'  => $method->getName(),
 						'priority'  => $priority,
 						'arg_count' => $arg_count,
-					];
-
+					] );
 				}
 			}
 		}
 
 		return $object;
-
 	}
 
 	/**
@@ -133,10 +120,15 @@ trait HookTrait {
 	 * Gets hook calls
 	 *
 	 * @since  1.0.2
+	 * @param  mixed $object The class object or null.
 	 * @return array
 	 */
-	public function get_calls() {
-		return $this->_called_doc_hooks;
+	public function get_calls( $object = null ) {
+		if ( is_null( $object ) ) {
+			$object = $this;
+		}
+
+		return Hooks::get()->get_hooks_for_object( $object );
 	}
 
 	/**
@@ -150,14 +142,12 @@ trait HookTrait {
 	 * @return mixed
 	 */
 	protected function _add_hook( $type, $name, $callback, $args = [] ) {
-
 		$priority  = isset( $args['priority'] ) ? $args['priority'] : 10;
 		$arg_count = isset( $args['arg_count'] ) ? $args['arg_count'] : PHP_INT_MAX;
 
 		$function = sprintf( 'add_%s', $type );
 
 		return call_user_func( $function, $name, $callback, $priority, $arg_count );
-
 	}
 
 	/**
@@ -168,12 +158,9 @@ trait HookTrait {
 	 * @return array
 	 */
 	protected function _args( $args ) {
-
 		return array_merge( [
 			'priority'  => 10,
 			'arg_count' => PHP_INT_MAX,
 		], $args );
-
 	}
-
 }
