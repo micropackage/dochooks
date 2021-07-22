@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [next]
+
+### Added
+- Central Hooks class storing hooked objects
+- `dump-hooks` binary
+
 ## 1.0.2
 
 ### Added
