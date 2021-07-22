@@ -21,14 +21,12 @@ class Helper {
 	 * @return bool
 	 */
 	public static function is_enabled() {
-
 		$reflector = new \ReflectionObject( new AnnotationTest() );
 
 		foreach ( $reflector->getMethods() as $method ) {
 			$doc = $method->getDocComment();
 			return (bool) strpos( $doc, '@action' );
 		}
-
 	}
 
 	/**
@@ -43,4 +41,13 @@ class Helper {
 		return $dochooks->add_hooks( $object );
 	}
 
+	/**
+	 * Loads dumped hooks.
+	 *
+	 * @param  string $file File with hooks.
+	 * @return void
+	 */
+	public static function load_hooks( $file ) {
+		Hooks::get()->load_hooks( $file );
+	}
 }
