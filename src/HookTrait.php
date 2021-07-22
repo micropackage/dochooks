@@ -46,6 +46,8 @@ trait HookTrait {
 			return;
 		}
 
+		$hooks->add_object( $object );
+
 		$reflector = new \ReflectionObject( $object );
 
 		foreach ( $reflector->getMethods() as $method ) {

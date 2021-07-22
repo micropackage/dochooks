@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.1.1
+
+### Fixed
+- Invalid context for objects hooked using Helper
+- Missing objects for dumped hooks
+
 ## 1.1.0
 
 ### Added
