@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+/**
+ * This file uses wp-cli to run real hook dumper.
+ *
+ * @package micropackage/dochooks
+ */
+
+$file = __DIR__ . '/dump-hooks.php';
+
+$output_file = $_SERVER['argc'] >= 2 ? $_SERVER['argv'][1] : null;
+
+if ( $output_file ) {
+	$output_file = realpath( __DIR__ . '../../../../../' . $output_file );
+}
+
+echo shell_exec( "wp eval-file {$file} {$output_file}" );
