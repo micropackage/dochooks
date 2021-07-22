@@ -64,7 +64,7 @@ trait HookTrait {
 
 					call_user_func( [ $this, "add_{$type}" ], $name, $callback, compact( 'priority', 'arg_count' ) );
 
-					$hooks->add_hook( $this, [
+					$hooks->add_hook( $object, [
 						'name'      => $name,
 						'type'      => $type,
 						'callback'  => $method->getName(),
