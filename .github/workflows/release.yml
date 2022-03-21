@@ -9,7 +9,6 @@ on:
 
 jobs:
   release:
-    if: github.event.action == 'release'
     name: Release
     runs-on: ubuntu-latest
     steps:
