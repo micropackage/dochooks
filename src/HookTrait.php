@@ -25,7 +25,7 @@ trait HookTrait {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	protected static $pattern = '#\* @(?P<type>filter|action|shortcode)\s+(?P<name>[a-z0-9\-\.\/_]+)(\s+(?P<priority>\d+))?#';
+	protected static $pattern = '#\* @(?P<type>filter|action|shortcode)\s+(?P<name>[^\s]+)(\s+(?P<priority>\d+))?#';
 
 	/**
 	 * Add actions/filters from the method of a class based on DocBlock
