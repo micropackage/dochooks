@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.1.2
+
+### Changed
+- Regex pattern to match hook name containing any character, except space
+
 ## 1.1.1
 
 ### Fixed
