@@ -1,6 +1,11 @@
 name: Release
 
-on: repository_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      new_version:
+        description: 'New version'
+        required: true
 
 jobs:
   release:
@@ -26,16 +31,16 @@ jobs:
       - name: Init git-flow
         run: git flow init -d
       - name: Start release
-        run: git flow release start ${{ github.event.client_payload.new_version }}
+        run: git flow release start ${{ github.event.inputs.new_version }}
       - name: Replace [Next] tags with new version number
         uses: jacobtomlinson/gha-find-replace@master
         with:
           find: "(?i)\\[Next\\]"
-          replace: "${{ github.event.client_payload.new_version }}"
+          replace: "${{ github.event.inputs.new_version }}"
       - name: Commit version bump
         run: git commit -am "Version bump"
       - name: Finish release
-        run: git flow release finish ${{ github.event.client_payload.new_version }} -m "v${{ github.event.client_payload.new_version }}"
+        run: git flow release finish ${{ github.event.inputs.new_version }} -m "v${{ github.event.inputs.new_version }}"
       - name: Push develop and tags
         uses: ad-m/github-push-action@master
         with:
