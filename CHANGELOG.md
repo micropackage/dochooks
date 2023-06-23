@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.1.3
+
+### Changed:
+- License from GPL to MIT
+
 ## 1.1.2
 
 ### Changed
