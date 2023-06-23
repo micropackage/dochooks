@@ -26,5 +26,10 @@
 			"Micropackage\\DocHooks\\" : "src"
 		}
 	},
-  "bin": ["bin/dump-hooks"]
+  "bin": ["bin/dump-hooks"],
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
 }
