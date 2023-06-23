@@ -37,7 +37,7 @@ jobs:
           find: "(?i)\\[Next\\]"
           replace: "${{ github.event.inputs.new_version }}"
       - name: Commit version bump
-        run: git commit -am "Version bump"
+        run: git commit -am "Version bump" --allow-empty
       - name: Finish release
         run: git flow release finish ${{ github.event.inputs.new_version }} -m "v${{ github.event.inputs.new_version }}"
       - name: Push develop and tags
